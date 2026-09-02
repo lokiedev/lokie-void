@@ -1,0 +1,18 @@
+# Template file for 'dwl'
+pkgname=dwl
+version=0.8
+revision=2
+hostmakedepends="pkg-config wayland-protocols"
+build_style="gnu-makefile"
+makedepends="libinput-devel wayland-devel wlroots0.19-devel libxkbcommon-devel"
+depends="libinput wayland libxkbcommon"
+short_desc="dwm for Wayland"
+maintainer="lokiedev <lokie.acc@proton.me>"
+license="GPL-3.0-or-later AND MIT AND CC0-1.0"
+homepage="https://codeberg.org/dwl/dwl"
+distfiles="https://codeberg.org/dwl/dwl/archive/v${version}.tar.gz"
+checksum=3080087e7f613bf6a350934231fd9ed478d04cd2a2f30da8a96cdf2066f59412
+
+do_configure() {
+	cp ${FILESDIR}/config.h ${wrksrc}/
+}

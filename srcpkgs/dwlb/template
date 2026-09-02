@@ -1,0 +1,23 @@
+# Template file for 'dwlb'
+pkgname=dwlb
+version=20250521
+revision=1
+_commit=48dbe00bdb98a1ae6a0e60558ce14503616aa759
+hostmakedepends="pkg-config wayland-protocols"
+build_style="gnu-makefile"
+makedepends="wayland-devel fcft-devel pixman-devel"
+depends=""
+short_desc="Feature-Complete Bar for DWL"
+maintainer="lokiedev <lokie.acc@proton.me>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/kolunmi/dwlb"
+distfiles="https://github.com/kolunmi/dwlb/archive/${_commit}.tar.gz"
+checksum=b2bb670c009c34a0f02958da71f6f02a47d42770724f6167f6e87f6571c73d38
+
+do_configure() {
+	cp ${FILESDIR}/config.h ${wrksrc}/
+}
+
+pre_build() {
+	CFLAGS+=" -I/usr/include/pixman-1"
+}

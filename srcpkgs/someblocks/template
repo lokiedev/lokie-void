@@ -1,0 +1,18 @@
+# Template file for 'dwlb'
+pkgname=someblocks
+version=1.0.1
+revision=1
+hostmakedepends=""
+build_style="gnu-makefile"
+makedepends=""
+depends=""
+short_desc="Modular status bar for somebar written in c."
+maintainer="lokiedev <lokie.acc@proton.me>"
+license="ISC"
+homepage="https://git.sr.ht/~raphi/someblocks"
+distfiles="https://git.sr.ht/~raphi/someblocks/archive/${version}.tar.gz"
+checksum=dbabd88e7cd91b430eece80adbc9876db39b38a5dc080e18795621fa5ec68fb2
+
+do_configure() {
+	cp ${FILESDIR}/blocks.h ${wrksrc}/
+}

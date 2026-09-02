@@ -1,0 +1,35 @@
+From 117d4148955833181ce90001c12e12b5ec9f1a93 Mon Sep 17 00:00:00 2001
+From: lokiedev <lokie.acc@proton.me>
+Date: Wed, 2 Sep 2026 01:02:56 +0800
+Subject: [PATCH] change installation path
+
+---
+ Makefile | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 52d2f2d..cac4b1b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,6 @@
+ BINS = dwlb
+ MANS = dwlb.1
+ 
+-PREFIX ?= /usr/local
+ CFLAGS += -Wall -Wextra -Wno-unused-parameter -Wno-format-truncation -g
+ 
+ all: $(BINS)
+@@ -13,8 +12,8 @@ clean:
+ 	$(RM) $(BINS) $(addsuffix .o,$(BINS))
+ 
+ install: all
+-	install -D -t $(PREFIX)/bin $(BINS)
+-	install -D -m0644 -t $(PREFIX)/share/man/man1 $(MANS)
++	install -D -t $(DESTDIR)$(PREFIX)/bin $(BINS)
++	install -D -m0644 -t $(DESTDIR)$(PREFIX)/share/man/man1 $(MANS)
+ 
+ WAYLAND_PROTOCOLS=$(shell pkg-config --variable=pkgdatadir wayland-protocols)
+ WAYLAND_SCANNER=$(shell pkg-config --variable=wayland_scanner wayland-scanner)
+-- 
+2.55.0
+
