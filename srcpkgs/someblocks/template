@@ -1,7 +1,7 @@
-# Template file for 'dwlb'
+# Template file for 'someblocks'
 pkgname=someblocks
 version=1.0.1
-revision=1
+revision=2
 hostmakedepends=""
 build_style="gnu-makefile"
 makedepends=""

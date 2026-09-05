@@ -47,7 +47,7 @@ static const Layout layouts[] = {
 
 /* Monitors */
 /* (x=-1, y=-1) is reserved as an "autoconfigure" monitor position indicator
- * WARNING: negative values other than (-1, -1) cause issues with Xwayland clients: 
+ * WARNING: negative values other than (-1, -1) cause issues with Xwayland clients:
  * https://gitlab.freedesktop.org/xorg/xserver/-/issues/899 */
 static const MonitorRule monrules[] = {
    /* name        mfact  nmaster scale layout       rotate/reflect                x    y
@@ -139,10 +139,14 @@ static const char *brightnessdowncmd[] = {
 
 
 static const char *volumeupcmd[] = {
-	"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL
+	"sh", "-c",
+	"wpctl set-volume @DEFAULT_AUDIO_SINK@ --limit 1.0 5%+ && pkill -SIGRTMIN+10 someblocks",
+	NULL
 };
 static const char *volumedowncmd[] = {
-	"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL
+	"sh", "-c",
+	"wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && pkill -SIGRTMIN+10 someblocks",
+	NULL
 };
 
 
@@ -167,7 +171,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_k,           focusstack,       {.i = -1} },
 
 	/* Scroll through layout */
-	/* This is intended to copy maximize behavior (like in MangoWM) 
+	/* This is intended to copy maximize behavior (like in MangoWM)
 	 * It works since there's only two layout defined in layouts variable (tiling and monocle) */
 	{ MODKEY,                    XKB_KEY_M,           setlayout,        {0} },
 	/* Increase or decrease master count */
@@ -210,6 +214,7 @@ static const Key keys[] = {
 	  spawn, {.v = volumeupcmd} },
 	{ 0, XKB_KEY_XF86AudioLowerVolume,
 	  spawn, {.v = volumedowncmd} },
+	{ 0, XKB_KEY_F2, spawn, {.v = volumedowncmd} }, /* My laptop volume down key is broken so this is the alternative */
 
 	/* Quit dwl */
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_q,           quit,             {0} },
