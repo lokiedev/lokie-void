@@ -130,11 +130,15 @@ static const char *menucmd[] = { "fuzzel", NULL };
 static const char *browsercmd[] = { "librewolf", NULL };
 
 static const char *brightnessupcmd[] = {
-	"brightnessctl", "-e4", "-n2", "set", "5%+", NULL
+	"sh", "-c",
+	"brightnessctl -n1 set +5% && pkill -SIGRTMIN+10 someblocks",
+	NULL
 };
 
 static const char *brightnessdowncmd[] = {
-	"brightnessctl", "-e4", "-n2", "set", "5%-", NULL
+	"sh", "-c",
+	"brightnessctl -n1 set 5%- && pkill -SIGRTMIN+10 someblocks",
+	NULL
 };
 
 

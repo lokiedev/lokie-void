@@ -3,7 +3,9 @@ static const Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
 	{"", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g", 30, 0},
 
-	{"vol: ", "vol=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null); echo \"${vol##* }\"",5 , 10},
+	{"vol: ", "vol=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null); echo \"${vol##* }\"", 5, 10},
+
+	{"bri: ", "echo $(($(brightnessctl get) * 100 / $(brightnessctl max)))", 5, 10},
 
 	{"bat: ", "echo $(cat /sys/class/power_supply/BAT*/capacity 2>/dev/null)", 60, 0},
 
