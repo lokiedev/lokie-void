@@ -153,6 +153,12 @@ static const char *volumedowncmd[] = {
 	NULL
 };
 
+static const char *screenshotcmd[] = {
+	"sh", "-c",
+	"grim \"$(xdg-user-dir PICTURES)/screenshots/screenshot_$(date +%H-%M-%S_%d-%m-%Y).png\"",
+	NULL
+}
+
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: 2 -> at, etc. */
@@ -162,6 +168,9 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_Return,      spawn,            {.v = termcmd} },
 	{ MODKEY,                    XKB_KEY_b,           spawn,            {.v = browsercmd} },
+
+	/* Tool */
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_s,           spawn,            {.v = screenshotcmd} },
 
 	/* Kill window */
 	{ MODKEY,                    XKB_KEY_q,           killclient,       {0} },
